@@ -5,6 +5,7 @@ const JWT_SECRET = 'Something'
 let users = []
 
 app.use(express.json())
+app.use(express.static('public'))
 
 function auth(req, res, next) {
     const token = req.headers.token;
