@@ -42,7 +42,7 @@
                     token: localStorage.getItem('token')
                 }
             })
-            console.log(response)
+            document.getElementById('information').innerHTML = 'Username: ' + response.data.username + ' password: ' + response.data.password
         }
 
         async function signUp() {
