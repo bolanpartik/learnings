@@ -37,6 +37,12 @@
 
         async function getInformation() {
             // send get request to /me endpoint with token to get username and password
+            const response = await axios.get('/me', {
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            console.log(response)
         }
 
         async function signUp() {
