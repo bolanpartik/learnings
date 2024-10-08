@@ -50,6 +50,11 @@
 
         async function signIn() {
             // send post request to /singin endpoint and store the token in localstorage
+            const response = await axios.post('/signin', {
+                username: username2.value,
+                password: password2.value
+            })
+            alert('Sign in done')
         }
 
         function logout() {
