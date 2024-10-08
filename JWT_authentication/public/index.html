@@ -55,6 +55,7 @@
                 password: password2.value
             })
             alert('Sign in done')
+            localStorage.setItem('token', response.data.token)
         }
 
         function logout() {
