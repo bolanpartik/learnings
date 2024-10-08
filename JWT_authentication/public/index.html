@@ -41,6 +41,11 @@
 
         async function signUp() {
             // send post request to /signup endpoint
+            const response = await axios.post('/signup', {
+                username: username1.value,
+                password: password1.value
+            })
+            alert('Sign up done')
         }
 
         async function signIn() {
