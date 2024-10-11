@@ -102,6 +102,23 @@ app.get('/todos', authentication, (req, res) => {
 
 app.post('/create', authentication, (req, res) => {
     // create todo with give details
+    const title = req.body.title;
+    if (!title) {
+        return res.status(400).send({
+            message: 'Title is required'
+        })
+    }
+    const currUser = users.find(user => user.username === req.username)
+    currUser.todos.push({
+        todoId: new Date().getTime(),
+        title: title,
+        description: req.body.description || null,
+        isDone: false
+    })
+
+    res.send({
+        message: 'Todo created successfully'
+    })
 })
 
 app.post('/update', authentication, (req, res) => {
