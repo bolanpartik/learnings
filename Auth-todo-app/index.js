@@ -45,6 +45,28 @@ app.post('/signup', (req, res) => {
 
 app.post('/signin', (req, res) => {
     // signin user and generate JWT for authentication routes/endpoints
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if (!username || !password) {
+        return res.status(400).send({
+            message: 'Username or password must be provided'
+        })
+    }
+
+    const foundUser = users.find(user => user.username === username && user.password === password)
+    if (!foundUser) {
+        return res.status(401).send({
+            message: 'Username or password incorrect'
+        })
+    }
+
+    const token = jwt.sign({ username }, JWT_SECRET)
+    foundUser.token = token
+    res.send({
+        message: 'Sign in done',
+        token: token
+    })
 })
 
 app.get('/todos', authentication, (req, res) => {
