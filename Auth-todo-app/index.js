@@ -123,6 +123,39 @@ app.post('/create', authentication, (req, res) => {
 
 app.post('/update', authentication, (req, res) => {
     // find existing todo and update them using todoId
+    const currUser = users.find(user => user.username === req.username)
+    if (!currUser) {
+        return res.status(404).send({
+            message: 'User not found'
+        })
+    }
+    console.log(currUser)
+    const todoId = req.body.todoId;
+    const title = req.body.title;
+    const description = req.body.description;
+    const isDone = req.body.isDone;
+
+    if (!todoId) {
+        return res.status(400).send({
+            message: 'Todo id missing'
+        })
+    }
+    let currTodo = currUser.todos.find( todo => todo.todoId === todoId)
+    console.log(currTodo)
+    if (title !== undefined) {
+        currTodo.title = title;
+    }
+    
+    if (description !== undefined) {
+        currTodo.description = description; 
+    }
+    
+    if (isDone !== undefined) {
+        currTodo.isDone = isDone; 
+    }
+    res.send({
+        message: 'Todo updated successfully'
+    })
 })
 
 app.listen(3000)
