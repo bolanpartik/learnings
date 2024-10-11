@@ -87,6 +87,17 @@ app.post('/signin', (req, res) => {
 
 app.get('/todos', authentication, (req, res) => {
     // show all todos of that specific user
+    const currUser = users.find(user => user.username === req.username)
+
+    if (!currUser) {
+        return res.status(404).send({
+            message: 'No user found'
+        })
+    }
+
+    res.send({
+        todos: currUser.todos
+    })
 })
 
 app.post('/create', authentication, (req, res) => {
