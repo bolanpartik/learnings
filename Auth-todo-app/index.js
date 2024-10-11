@@ -17,6 +17,22 @@ function genUserId() {
 
 function authentication(req, res, next) {
     // authentication using JWT
+    const token = req.headers.token
+    if (token) {
+        try {
+            const userDetails = jwt.verify(token, JWT_SECRET)
+            req.username = userDetails.username
+            next()
+        } catch (e) {
+            res.status(401).send({
+                message: 'Unauthorized'
+            })
+        }
+    } else {
+        res.status(400).send({
+            message: 'Token missing'
+        })
+    }
 }
 
 app.post('/signup', (req, res) => {
