@@ -129,7 +129,6 @@ app.post('/update', authentication, (req, res) => {
             message: 'User not found'
         })
     }
-    console.log(currUser)
     const todoId = req.body.todoId;
     const title = req.body.title;
     const description = req.body.description;
@@ -141,7 +140,6 @@ app.post('/update', authentication, (req, res) => {
         })
     }
     let currTodo = currUser.todos.find( todo => todo.todoId === todoId)
-    console.log(currTodo)
     if (title !== undefined) {
         currTodo.title = title;
     }
@@ -155,6 +153,36 @@ app.post('/update', authentication, (req, res) => {
     }
     res.send({
         message: 'Todo updated successfully'
+    })
+})
+
+app.delete('/delete', authentication, (req, res) => {
+    const currUser = users.find(user => user.username === req.username)
+
+    if (!currUser) {
+        return res.status(404).send({
+            message: 'User not found'
+        })
+    }
+
+    const todoId = req.body.todoId;
+
+    if (!todoId) {
+        return res.status(400).send({
+            message: 'Id must be provided'
+        })
+    }
+
+    const currTodo = currUser.todos.find(todo => todo.todoId == todoId)
+    if (!currTodo) {
+        return res.status(404).send({
+            message: 'Todo not found with provided id'
+        })
+    }
+
+    currUser.todos = currUser.todos.filter(todo => todo.todoId !== todoId)
+    res.send({
+        message: 'Todo deleted successfully'
     })
 })
 
