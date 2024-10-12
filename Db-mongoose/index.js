@@ -67,7 +67,22 @@ function auth(req, res, next) {
 }
 
 app.get('/todos', auth, async (req, res) => {
+    const userId = req.userId
 
+    const user = await UserModel.findOne({
+        _id: userId
+    })
+
+    if (user) {
+        const todos = await TodoModel.find({
+            userId: user._id
+        })
+        res.send({ todos })
+    } else {
+        res.send({
+            message: 'User not found'
+        })
+    }
 })
 
 app.post('/todo', auth, async (req, res) => {
