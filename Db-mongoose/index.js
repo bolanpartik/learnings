@@ -47,8 +47,25 @@ app.post('/signin', async (req, res) => {
 })
 
 function auth(req, res, next) {
-    
+    const token = req.headers.token;
+    if (!token) {
+        res.send({
+            message: 'Please provide token'
+        })
+        return
+    }
+
+    try {
+        const verifyToken = jwt.verify(token, JWT_SECRET)
+        req.userId = verifyToken.userId
+        next()
+    } catch (error) {
+        res.send({
+            message: error.message
+        })
+    }
 }
+
 app.get('/todos', auth, async (req, res) => {
 
 })
