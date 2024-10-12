@@ -9,7 +9,20 @@ mongoose.connect('')
 app.use(express.json())
 
 app.post('/signup', async (req, res) => {
-
+    const { email, password } = req.body
+    try {
+        await UserModel.create({
+            email: email,
+            password: password
+        })
+        res.send({
+            message: 'Sign up done'
+        })
+    } catch (error) {
+        res.send({
+            message: 'User already signed up'
+        })
+    }
 })
 
 app.post('/signin', async (req, res) => {
