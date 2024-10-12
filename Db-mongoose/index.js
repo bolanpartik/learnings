@@ -26,7 +26,24 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/signin', async (req, res) => {
- 
+    const { email, password } = req.body
+
+    const user = await UserModel.findOne({
+        email: email,
+        password: password
+    })
+
+    if (user) {
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET)
+        res.send({
+            message: 'Sign in successful',
+            token: token
+        })
+    } else {
+        res.send({
+            message: 'Incorrect credentials'
+        })
+    }
 })
 
 function auth(req, res, next) {
