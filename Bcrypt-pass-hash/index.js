@@ -4,6 +4,7 @@ const { UserModel, TodoModel } = require('./db')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { auth, JWT_SECRET } = require('./auth')
 
 // MongoDB cluster connection string here
 mongoose.connect('')
@@ -61,11 +62,11 @@ app.post('/signin', async (req, res) => {
     }
 })
 
-app.get('/todos', async (req, res) => {
+app.get('/todos', auth, async (req, res) => {
 
 })
 
-app.post('/todo', async (req, res) => {
+app.post('/todo', auth, async (req, res) => {
 
 })
 
