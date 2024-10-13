@@ -79,7 +79,30 @@ app.get('/todos', auth, async (req, res) => {
 })
 
 app.post('/todo', auth, async (req, res) => {
-
+    const userId = req.userId
+    const { title, isDone } = req.body
+    console.log(title, isDone)
+    if (!title) {
+        res.send({
+            message: 'Title is not provided'
+        })
+        return
+    }
+    try {
+        await TodoModel.create({
+            title:title,
+            isDone:isDone,
+            userId:userId
+        })
+        res.send({
+            message: "Todo created successfully"
+        })
+    } catch (error) {
+        res.send({
+            message: 'Error while adding todo in db',
+            error: error.message
+        })
+    }
 })
 
 app.listen(3000)
