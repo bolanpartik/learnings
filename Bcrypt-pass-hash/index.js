@@ -63,7 +63,19 @@ app.post('/signin', async (req, res) => {
 })
 
 app.get('/todos', auth, async (req, res) => {
-
+    const userId = req.userId
+    try {
+        const todos = await TodoModel.find({
+            userId
+        })
+        res.send({
+            todos
+        })
+    } catch (error) {
+        res.send({
+            message: error.message
+        })
+    }
 })
 
 app.post('/todo', auth, async (req, res) => {
