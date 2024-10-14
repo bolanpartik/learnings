@@ -112,7 +112,39 @@ app.get('/todos', auth, async (req, res) => {
 })
 
 app.post('/todo', auth, async (req, res) => {
+    const userId = req.userId
+    const { title, isDone } = req.body
+    const requiredBody = z.object({
+        title: z.string()
+            .min(3, 'Title should be greater than 3 char')
+            .max(300, 'Max length reached'),
+        isDone: z.boolean()
+    })
+    const { success, error } = requiredBody.safeParse({
+        title: title,
+        isDone: isDone
+    })
+    if (error) {
+        return res.status(400).send({
+            message: error.issues.map(issue => issue.message).join(', ')
+        })
+    }
 
+    try {
+        await TodoModel.create({
+            title: title,
+            isDone: isDone,
+            userId: userId
+        })
+        res.status(200).send({
+            message: "Todo created successfully"
+        })
+    } catch (error) {
+        res.status(500).send({
+            message: 'Error while adding todo in db',
+            error: error.message
+        })
+    }
 })
 
 app.listen(3000)
