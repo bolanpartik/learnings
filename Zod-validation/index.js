@@ -1,5 +1,9 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
+
+// MongoDB cluster connection string here
+mongoose.connect('')
 
 app.use(express.json())
 
