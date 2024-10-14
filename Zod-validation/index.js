@@ -5,6 +5,7 @@ const { UserModel, TodoModel } = require('./db')
 const bcrypt = require('bcrypt')
 const { auth, JWT_SECRET } = require('./auth')
 const { z } = require('zod')
+const jwt = require('jsonwebtoken')
 
 // MongoDB cluster connection string here
 mongoose.connect('')
@@ -61,6 +62,36 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/signin', async (req, res) => {
+    const { success, error } = userValidationSchema.safeParse(req.body)
+
+    if (error) {
+        return res.status(400).send({
+            message: error.issues.map(issue => issue.message).join(', ')
+        })
+    }
+    const { email, password } = req.body
+    const user = await UserModel.findOne({
+        email: email,
+    })
+    if (!user) {
+        return res.status(401).send({
+            message: 'Incorrect credentials'
+        })
+    }
+
+    const matchPass = await bcrypt.compare(password, user.password)
+
+    if (matchPass) {
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET)
+        res.status(200).send({
+            message: 'Sign in done',
+            token
+        })
+    } else {
+        res.status(401).send({
+            message: 'Incorrect credentials'
+        })
+    }
 
 })
 
