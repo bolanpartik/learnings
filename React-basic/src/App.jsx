@@ -1,22 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
   const [count, setCount] = useState(0)
+  
+  useEffect(()=>{
+    setInterval(()=>{
+      setCount(count => count + 1)
+    },1000)
+  },[])
 
-  function clickHandler() {
-    setCount(count + 1)
-  }
 
   return (
     <>
       <p>{count}</p>
-      <Button clickHandler={clickHandler} />
     </>
   )
-}
-
-function Button(props) {
-  return <button onClick={props.clickHandler}>Increment</button>
 }
 
 export default App
