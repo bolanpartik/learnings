@@ -29,12 +29,12 @@ function NotificationCounter() {
   }
 
   return <div >
-    <div >
-      <img src="https://cdn-icons-png.flaticon.com/512/3239/3239958.png" alt="" />
-      <span>{notifications}</span>
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <img src="https://cdn-icons-png.flaticon.com/512/3239/3239958.png" alt="" style={{ width: 30 }} />
+      <span style={{ fontSize: 20,color:'red' }}>{notifications}</span>
     </div>
 
-    <button onClick={handle}>Increase</button>
+    <button onClick={handle} style={{marginTop:10}}>Increase</button>
 
   </div>
 }
