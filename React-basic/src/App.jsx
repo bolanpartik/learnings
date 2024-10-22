@@ -1,38 +1,34 @@
 import { useState } from 'react'
-import PostsComponent from './Posts'
 
 function App() {
-  const [posts, setPosts] = useState([])
+  const [currTab, setCurrTab] = useState('home')
 
-  const postComponents = posts.map(post =>
-    <PostsComponent
-      image={post.image}
-      name={post.name}
-      subtitle={post.subtitle}
-      time={post.time}
-      description={post.description}
-    />
-  )
+  return <div>
 
-  function addPost() {
-    setPosts([...posts, {
-      name: 'Random',
-      subtitle: '11000',
-      time: '20m ago',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBFbCgb0ajYdgdzEXKZ3Kg7y1Lc3upM0IDg&s',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet delectus repellendus praesentium, laborum ipsam'
-    }])
-  }
+    <button
+      onClick={() => setCurrTab('home')}
+      style={{ backgroundColor: currTab === 'home' ? 'skyblue' : 'inherit' }}>Home
+    </button>
 
-  return <div style={{ background: "#dfe6e9", height: "100vh", }}>
-    <button onClick={addPost}>Add post</button>
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <div>
-        {postComponents}
-      </div>
-    </div>
+    <button
+      onClick={() => setCurrTab('notifications')}
+      style={{ backgroundColor: currTab === 'notifications' ? 'skyblue' : 'inherit' }}>Notifications
+    </button>
+
+    <button
+      onClick={() => setCurrTab('jobs')}
+      style={{ backgroundColor: currTab === 'jobs' ? 'skyblue' : 'inherit' }}>Jobs
+    </button>
+
+    <button
+      onClick={() => setCurrTab('contact')}
+      style={{ backgroundColor: currTab === 'contact' ? 'skyblue' : 'inherit' }}>Contact
+    </button>
+
   </div>
-
 }
+
+
+
 
 export default App

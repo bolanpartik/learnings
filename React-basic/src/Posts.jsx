@@ -1,3 +1,33 @@
+// App component for this component
+
+// const [posts, setPosts] = useState([])
+// const postComponents = posts.map(post =>
+//   <PostsComponent
+//     image={post.image}
+//     name={post.name}
+//     subtitle={post.subtitle}
+//     time={post.time}
+//     description={post.description}
+//   />
+// )
+// function addPost() {
+//   setPosts([...posts, {
+//     name: 'Random',
+//     subtitle: '11000',
+//     time: '20m ago',
+//     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBFbCgb0ajYdgdzEXKZ3Kg7y1Lc3upM0IDg&s',
+//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet delectus repellendus praesentium, laborum ipsam'
+//   }])
+// }
+// return <div style={{ background: "#dfe6e9", height: "100vh", }}>
+//   <button onClick={addPost}>Add post</button>
+//   <div style={{ display: "flex", justifyContent: "center" }}>
+//     <div>
+//       {postComponents}
+//     </div>
+//   </div>
+// </div>
+
 export default function PostsComponent({ image, name, subtitle, time, description }) {
 
     return <div style={{ width: 400, backgroundColor: "white", borderRadius: 10, borderColor: "gray", borderWidth: 1, padding: 20, marginBottom: 5 }}>
