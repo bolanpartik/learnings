@@ -3,14 +3,17 @@ import { useEffect, useState } from 'react'
 function App() {
   const [currTab, setCurrTab] = useState(1)
   const [data, setData] = useState({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     console.log('sending request to backend to get data for tab ' + currTab)
     fetch('https://jsonplaceholder.typicode.com/todos/' + currTab)
       .then(async res => {
         const response = await res.json()
         console.log(response)
         setData(response)
+        setLoading(false)
       })
   }, [currTab])
 
@@ -36,7 +39,7 @@ function App() {
       style={{ backgroundColor: currTab === 4 ? 'skyblue' : 'inherit' }}>todo4
     </button>
     <br />
-    {JSON.stringify(data)}
+    {loading ? ' Loading...' : JSON.stringify(data)}
   </div>
 }
 
