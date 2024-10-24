@@ -1,49 +1,32 @@
-import { useEffect, useState } from 'react'
 
 function App() {
-  const [currTab, setCurrTab] = useState(1)
-  const [data, setData] = useState({})
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    console.log('sending request to backend to get data for tab ' + currTab)
-    fetch('https://jsonplaceholder.typicode.com/todos/' + currTab)
-      .then(async res => {
-        const response = await res.json()
-        console.log(response)
-        setData(response)
-        setLoading(false)
-      })
-  }, [currTab])
 
   return <div>
+    <Card>
+      <strong>Weekend Plans</strong>
+      <p>I'm thinking of going hiking this Saturday. The weather looks perfect!</p>
+      <p>Any recommendations for trails? I want something with a great view!</p>
+    </Card>
 
-    <button
-      onClick={() => setCurrTab(1)}
-      style={{ backgroundColor: currTab === 1 ? 'skyblue' : 'inherit' }}>todo1
-    </button>
+    <Card>
+      <strong>Book Recommendations</strong>
+      <p>Just finished reading "The Night Circus." It was mesmerizing!</p>
+      <p>What are you currently reading? I'm looking for my next page-turner!</p>
+    </Card>
 
-    <button
-      onClick={() => setCurrTab(2)}
-      style={{ backgroundColor: currTab === 2 ? 'skyblue' : 'inherit' }}>todo2
-    </button>
-
-    <button
-      onClick={() => setCurrTab(3)}
-      style={{ backgroundColor: currTab === 3 ? 'skyblue' : 'inherit' }}>todo3
-    </button>
-
-    <button
-      onClick={() => setCurrTab(4)}
-      style={{ backgroundColor: currTab === 4 ? 'skyblue' : 'inherit' }}>todo4
-    </button>
-    <br />
-    {loading ? ' Loading...' : JSON.stringify(data)}
   </div>
 }
 
-
-
+function Card({ children }) {
+  return <div style={{
+    border: '1px solid grey',
+    borderRadius: '15px',
+    padding: '20px',
+    margin: '20px',
+    boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+  }}>
+    {children}
+  </div>
+}
 
 export default App
