@@ -1,40 +1,31 @@
-import { useState } from "react"
+import { useState } from "react";
 
 function App() {
-  const [isModelOpen, setIsModelOpen] = useState(false)
+  return (
+    <div>
+      <Collapsible content={'Weekend Plans'}>
+        <p>Section 1: Weekend Plans</p>
+        <p>This weekend, I’m planning a trip to the mountains for some hiking. I’m excited to explore new trails and enjoy the fresh air. It’s a great way to recharge and connect with nature!</p>
+      </Collapsible>
 
-  return <div>
-    <button onClick={() => setIsModelOpen(true)}>Open Model</button>
-    <Model isOpen={isModelOpen} onClose={() => setIsModelOpen(false)}>
-      <h3>New Recipe Idea! 🍽️</h3>
-      <p>I'm excited to try a new dish this week. Any favorite recipes?</p>
-      <p>Looking for something quick and delicious!</p>
-    </Model>
-
-  </div>
+      <Collapsible content={'Book Recommendations'}>
+        <p>Section 2: Book Recommendations</p>
+        <p>I just finished reading a fantastic novel and would love to share some recommendations! If you're into thrillers, "The Silent Patient" is a must-read. What are some of your favorite books?</p>
+      </Collapsible>
+    </div>
+  );
 }
 
-function Model({ isOpen, onClose, children }) {
-  return (isOpen ?
-    <div style={{
-      border: '1px solid grey',
-      borderRadius: '15px',
-      padding: '20px',
-      margin: '20px',
-      boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
-      position: 'relative'
-    }}>
-      <button style={{
-        position: 'absolute',
-        right: 10,
-        top: 10,
-        border: 'none',
-        background: 'inherit'
-      }}
-        onClick={onClose}>Close
+function Collapsible({ children, content }) {
+  const [isOpen, setOpen] = useState(false)
+
+  return (
+    <div>
+      <button onClick={() => setOpen(!isOpen)}>
+        {content} {isOpen ? ' - ' : ' + '}
       </button>
-      {children}
-    </div> : null)
+      {isOpen && <div>{children}</div>}
+    </div>
+  )
 }
-
 export default App
