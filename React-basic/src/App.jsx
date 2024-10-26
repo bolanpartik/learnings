@@ -1,17 +1,18 @@
-function App() {
-  const items = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' }
-  ]
-  return <ListItem items={items} />
-}
+import { Component } from "react";
 
-function ListItem({ items }) {
-  return <ul>
-    {items.map(item => (
-      <li key={item.id}>{item.name}</li>
-    ))}
-  </ul>
+export default class CounterClass extends Component {
+  state = {
+    count: 0
+  }
+  increment = () => {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  render() {
+    return <div>
+      <div>Count is : {this.state.count}</div>
+      <button onClick={this.increment}>Increment</button>
+    </div>
+  }
 }
-export default App
