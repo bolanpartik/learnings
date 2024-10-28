@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -9,16 +9,23 @@ function App() {
       <Link to="/contact">contact</Link>|
       <Link to="/support">Support</Link>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/info' element={<Info />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/support' element={<Support />} />
-        <Route path='*' element={<ErrorPage />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/info' element={<Info />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/support' element={<Support />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
 }
-
+function Layout() {
+  return <div>
+    Header here
+    <Outlet />
+  </div>
+}
 function Home() {
   return <div style={{ fontSize: 30 }}>This is home page</div>
 }
@@ -62,7 +69,7 @@ function Support() {
   </div>
 }
 
-function ErrorPage(){
+function ErrorPage() {
   return <div>
     Sorry Page not found
   </div>
