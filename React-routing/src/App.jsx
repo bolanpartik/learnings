@@ -4,10 +4,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Link to="/">Home</Link>|
-      <Link to="/info">Info</Link>|
-      <Link to="/contact">contact</Link>|
-      <Link to="/support">Support</Link>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Home />} />
@@ -22,7 +18,10 @@ function App() {
 }
 function Layout() {
   return <div>
-    Header here
+    <Link to="/">Home</Link>|
+    <Link to="/info">Info</Link>|
+    <Link to="/contact">contact</Link>|
+    <Link to="/support">Support</Link>
     <Outlet />
   </div>
 }
