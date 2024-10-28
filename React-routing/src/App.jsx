@@ -9,10 +9,10 @@ function App() {
       <Link to="/contact">contact</Link>|
       <Link to="/support">Support</Link>
       <Routes>
-        <Route path='/' element={<Home />} ></Route>
-        <Route path='/info' element={<Info />} > </Route >
-        <Route path='/contact' element={<Contact />} > </Route >
-        <Route path='/support' element={<Support />} > </Route >
+        <Route path='/' element={<Home />} />
+        <Route path='/info' element={<Info />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/support' element={<Support />} />
       </Routes>
     </BrowserRouter>
   )
