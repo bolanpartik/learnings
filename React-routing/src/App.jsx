@@ -13,10 +13,12 @@ function App() {
         <Route path='/info' element={<Info />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/support' element={<Support />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   )
 }
+
 function Home() {
   return <div style={{ fontSize: 30 }}>This is home page</div>
 }
@@ -33,6 +35,7 @@ function Info() {
     <button onClick={redirectUser}>Go to Home</button>
   </div>
 }
+
 function Contact() {
   const navigate = useNavigate()
 
@@ -45,6 +48,7 @@ function Contact() {
     <button onClick={redirectUser}>Go to Home</button>
   </div>
 }
+
 function Support() {
   const navigate = useNavigate()
 
@@ -55,6 +59,12 @@ function Support() {
   return <div style={{ fontSize: 30 }}>
     <div>This is support page</div>
     <button onClick={redirectUser}>Go to Home</button>
+  </div>
+}
+
+function ErrorPage(){
+  return <div>
+    Sorry Page not found
   </div>
 }
 export default App
