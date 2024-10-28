@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 
 function App() {
 
@@ -18,15 +18,43 @@ function App() {
   )
 }
 function Home() {
-  return <div style={{fontSize:30}}>This is home page</div>
+  return <div style={{ fontSize: 30 }}>This is home page</div>
 }
+
 function Info() {
-  return <div style={{fontSize:30}}>This is info page</div>
+  const navigate = useNavigate()
+
+  function redirectUser() {
+    navigate('/')
+  }
+
+  return <div style={{ fontSize: 30 }}>
+    <div>This is info page</div>
+    <button onClick={redirectUser}>Go to Home</button>
+  </div>
 }
 function Contact() {
-  return <div style={{fontSize:30}}>This is contact page</div>
+  const navigate = useNavigate()
+
+  function redirectUser() {
+    navigate('/')
+  }
+
+  return <div style={{ fontSize: 30 }}>
+    <div>This is contact page</div>
+    <button onClick={redirectUser}>Go to Home</button>
+  </div>
 }
 function Support() {
-  return <div style={{fontSize:30}}>This is support page</div>
+  const navigate = useNavigate()
+
+  function redirectUser() {
+    navigate('/')
+  }
+
+  return <div style={{ fontSize: 30 }}>
+    <div>This is support page</div>
+    <button onClick={redirectUser}>Go to Home</button>
+  </div>
 }
 export default App
