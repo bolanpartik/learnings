@@ -1,16 +1,20 @@
-function App() {
-  return (
-    <>
-      <div>Hello</div>
-      <div>Hi</div>
-    </>
-  )
+import { useRef } from "react"
 
-  // Wrong can't return two element so wrap them in fragment(<> </>)
-  // return (
-  //     <div>Hello</div>
-  //     <div>Hi</div>
-  // )
+function App() {
+  const inputRef = useRef()
+
+  function inputFocus() {
+    inputRef.current.focus()
+  }
+
+  return (
+    <div>
+      Login
+      <input type="text" ref={inputRef} />
+      <input type="text" />
+      <button onClick={inputFocus}>Sumbit</button>
+    </div>
+  )
 }
 
 export default App
