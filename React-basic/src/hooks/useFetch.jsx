@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-export function useFetch(url) {
+export function useFetch(url, refetchDelay) {
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const interValId = useRef()
 
     async function fetchData() {
         try {
@@ -20,7 +21,11 @@ export function useFetch(url) {
 
     useEffect(() => {
         fetchData()
-    }, [url])
+        if (refetchDelay) {
+            interValId.current = setInterval(fetchData, refetchDelay)
+        }
+        return () => clearInterval(interValId.current)
+    }, [url, refetchDelay])
 
     return {
         data,

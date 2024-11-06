@@ -2,7 +2,7 @@ import { useFetch } from "./hooks/useFetch"
 
 function App() {
 
-  const { data, loading, error } = useFetch('https://dummyjson.com/todos/1')
+  const { data, loading, error } = useFetch('https://dummyjson.com/todos/1', 5000)
   if (error) {
     return <div>{error}</div>
   }
