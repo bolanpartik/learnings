@@ -1,9 +1,13 @@
-import CounterContext from './CounterContext'
+import { useFetch } from "./hooks/useFetch"
 
 function App() {
 
+  const { data } = useFetch('https://dummyjson.com/todos/2')
+
   return (
-    <CounterContext />
+    <div>
+      {data.todo}
+    </div>
   )
 }
 
