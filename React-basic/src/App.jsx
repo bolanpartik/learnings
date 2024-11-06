@@ -2,11 +2,13 @@ import { useFetch } from "./hooks/useFetch"
 
 function App() {
 
-  const { data } = useFetch('https://dummyjson.com/todos/2')
-
+  const { data, loading, error } = useFetch('https://dummyjson.com/todos/1')
+  if (error) {
+    return <div>{error}</div>
+  }
   return (
     <div>
-      {data.todo}
+      {loading ? <p>Loading...</p> : <p>{data.todo}</p>}
     </div>
   )
 }
