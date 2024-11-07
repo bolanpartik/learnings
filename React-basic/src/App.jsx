@@ -1,14 +1,15 @@
-import { useFetch } from "./hooks/useFetch"
+import { useState } from "react"
+import { usePrev } from "./hooks/usePrev"
 
 function App() {
-
-  const { data, loading, error } = useFetch('https://dummyjson.com/todos/1', 5000)
-  if (error) {
-    return <div>{error}</div>
-  }
+  const [count, setCount] = useState(0)
+  const prevVal = usePrev(count)
+  
   return (
     <div>
-      {loading ? <p>Loading...</p> : <p>{data.todo}</p>}
+      <p>Count: {count}</p>
+      <button onClick={()=> setCount(count + 1)}>Increase</button>
+      <p>Previous value is : {prevVal}</p>
     </div>
   )
 }
