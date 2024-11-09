@@ -1,25 +1,24 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { usePrev, usePrevUpdated } from "./hooks/usePrev"
+import { useDebounce } from "./hooks/useDebounce"
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [something, setSomething] = useState()
+  const [value, setValue] = useState(null)
+  const debouncedValue = useDebounce(value, 200)
 
-  const prevVal = usePrev(count)
-  const prevValUpdated = usePrevUpdated(count)
-
-  // Do extra re-render
-  const glitch = ()=> {
-    setSomething(Math.random())
+  // In actual send request to backend url to get data
+  function getData(){
+    console.log('fetching data from db')
   }
+
+  useEffect(()=>{
+    getData()
+  },[debouncedValue])
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-      <button onClick={glitch}>Glitch</button>
-      <p>Previous value is : {prevVal}</p>
-      <p>Updated Previous value is  : {prevValUpdated}</p>
+      <input type="text" onChange={(e)=> setValue(e.target.value)} />
+      <button>Search</button>
     </div>
   )
 }
