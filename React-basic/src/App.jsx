@@ -1,12 +1,10 @@
-import { useIsOnline } from "./hooks/useIsOnline"
+import SelectorRecoil from "./SelectorRecoil"
 
 function App() {
 
-  const isOnline = useIsOnline()
-
   return (
     <>
-      <p>user is : {isOnline ? 'online' : 'offline'}</p>
+      <SelectorRecoil/>
     </>
   )
 }
