@@ -1,12 +1,8 @@
-import SelectorRecoil from "./SelectorRecoil"
+import { TemeratureRecoil } from "./TemperatureRecoil"
 
 function App() {
 
-  return (
-    <>
-      <SelectorRecoil/>
-    </>
-  )
+  return <TemeratureRecoil />
 }
 
 export default App
