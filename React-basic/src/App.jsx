@@ -1,8 +1,8 @@
-import { TemeratureRecoil } from "./TemperatureRecoil"
+import CounterMemo from "./CounterMemo"
 
 function App() {
 
-  return <TemeratureRecoil />
+  return <CounterMemo/>
 }
 
 export default App
