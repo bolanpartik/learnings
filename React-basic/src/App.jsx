@@ -1,8 +1,13 @@
-import CounterMemo from "./CounterMemo"
+import { RecoilRoot } from "recoil"
+import { LinkedinNavbar } from "./components/LinkedinNavbar"
 
 function App() {
 
-  return <CounterMemo/>
+  return (
+    <RecoilRoot>
+      <LinkedinNavbar />
+    </RecoilRoot>
+  )
 }
 
 export default App
