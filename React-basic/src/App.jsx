@@ -1,12 +1,9 @@
-import { RecoilRoot } from "recoil"
-import { LinkedinNavbar } from "./components/LinkedinNavbar"
+import { TodoRecoil } from "./components/TodoRecoil"
 
 function App() {
 
   return (
-    <RecoilRoot>
-      <LinkedinNavbar />
-    </RecoilRoot>
+    <TodoRecoil />
   )
 }
 
