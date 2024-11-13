@@ -13,7 +13,7 @@ export function TodoRecoil() {
 function Todo({ id }) {
     const currTodo = useRecoilValue(todoItemAtom(id))
     return <div>
-        <div>{currTodo.title}</div>
+        <div>{currTodo.todo}</div>
         <div>{currTodo.completed}</div>
     </div>
 }
